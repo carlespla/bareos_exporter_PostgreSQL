@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/carlespla/bareos_exporter2/error"
+	"github.com/carlespla/bareos_exporter_PostgreSQL/error"
 
 	"flag"
 	"fmt"
@@ -19,16 +19,16 @@ var connectionString string
 var (
 	exporterPort     = flag.Int("port", 9625, "Bareos exporter port")
 	exporterEndpoint = flag.String("endpoint", "/metrics", "Bareos exporter endpoint")
-	mysqlUser        = flag.String("u", "root", "Bareos MySQL username")
-	mysqlAuthFile    = flag.String("p", "./auth", "MySQL password file path")
-	mysqlHostname    = flag.String("h", "127.0.0.1", "MySQL hostname")
-	mysqlPort        = flag.String("P", "3306", "MySQL port")
-	mysqlDb          = flag.String("db", "bareos", "MySQL database name")
+	mysqlUser        = flag.String("u", "root", "Bareos PostgreSQL username")
+	mysqlAuthFile    = flag.String("p", "./auth", "PostgreSQL password file path")
+	mysqlHostname    = flag.String("h", "127.0.0.1", "PostgreSQL hostname")
+	mysqlPort        = flag.String("P", "5432", "PostgreSQL port")
+	mysqlDb          = flag.String("db", "bareos", "PostgreSQL database name")
 )
 
 func init() {
 	flag.Usage = func() {
-		fmt.Println("Usage: bareos_exporter2 [ ... ]\n\nParameters:")
+		fmt.Println("Usage: bareos_exporter_PostgreSQL [ ... ]\n\nParameters:")
 		fmt.Println()
 		flag.PrintDefaults()
 	}

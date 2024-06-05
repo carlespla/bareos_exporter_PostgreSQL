@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/carlespla/bareos_exporter2/dataaccess"
+	"github.com/carlespla/bareos_exporter_PostgreSQL/dataaccess"
 	"github.com/prometheus/client_golang/prometheus"
 
 	log "github.com/sirupsen/logrus"
