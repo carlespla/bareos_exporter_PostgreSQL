@@ -40,7 +40,7 @@ func main() {
 	pass, err := ioutil.ReadFile(*mysqlAuthFile)
 	error.Check(err)
 
-	connectionString = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true", *mysqlUser, strings.TrimSpace(string(pass)), *mysqlHostname, *mysqlPort, *mysqlDb)
+	connectionString = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?sslmode=disable", *mysqlUser, strings.TrimSpace(string(pass)), *mysqlHostname, *mysqlPort, *mysqlDb)
 	log.Info("Starting ...")
 	collector := bareosCollector()
 	log.Info("Conecting ...", collector)

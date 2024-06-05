@@ -21,12 +21,12 @@ docker run --network host --name bareos_exporter_PostgreSQL -v /bareos_exporter/
 
 ### Flags
 
-Name    | Description                                                                                 | Default
---------|---------------------------------------------------------------------------------------------|----------------------
-port    | Bareos exporter port                                                                        | 9625
-endpoint| Bareos exporter endpoint.                                                                   | "/metrics"
-u       | Username used to access Bareos MySQL Database                                               | "root"
-p       | Path to file containing your MySQL password. Written inside a file to prevent from leaking. | "./auth"
-h       | MySQL instance hostname.                                                                    | "127.0.0.1"
-P       | MySQL instance port.                                                                        | "5432"
-db      | MySQL database name.                                                                        | "bareos"
+Name    | Description                                                                                      | Default
+--------|--------------------------------------------------------------------------------------------------|----------------------
+port    | Bareos exporter port                                                                             | 9625
+endpoint| Bareos exporter endpoint.                                                                        | "/metrics"
+u       | Username used to access Bareos PostgreSQL Database                                               | "root"
+p       | Path to file containing your PostgreSQL password. Written inside a file to prevent from leaking. | "./auth"
+h       | PostgreSQL instance hostname.                                                                    | "127.0.0.1"
+P       | PostgreSQL instance port.                                                                        | "5432"
+db      | PostgreSQL database name.                                                                        | "bareos"
