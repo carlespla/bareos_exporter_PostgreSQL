@@ -1,0 +1,1 @@
+# bareos_exporter_PostgreSQL
