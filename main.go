@@ -39,7 +39,7 @@ func main() {
 
 	pass, err := ioutil.ReadFile(*postgresPassword)
 	error.Check(err)
-	connectionString = fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", *postgresHostname, *postgresPort, *postgresUser, strings.TrimSpace(string(pass)), *postgresDb)
+	connectionString = fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", *postgresHostname, *postgresPort, *postgresUser, strings.TrimSpace(string(pass)), *postgresDb)
 	//connectionString = fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=disable", *postgresUser, strings.TrimSpace(string(pass)), *postgresHostname, *postgresPort, *postgresDb)
 	log.Info("Starting ...", connectionString)
 	collector := bareosCollector()
