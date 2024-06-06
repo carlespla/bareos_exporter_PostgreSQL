@@ -19,11 +19,11 @@ var connectionString string
 var (
 	exporterPort     = flag.Int("port", 9625, "Bareos exporter port")
 	exporterEndpoint = flag.String("endpoint", "/metrics", "Bareos exporter endpoint")
-	postgresUser     = flag.String("user", "root", "Bareos PostgreSQL username")
-	postgresPassword = flag.String("password", "./auth", "PostgreSQL password file path")
-	postgresHostname = flag.String("hostname", "127.0.0.1", "PostgreSQL hostname")
-	postgresPort     = flag.String("port", "5432", "PostgreSQL port")
-	postgresDb       = flag.String("dbname", "bareos", "PostgreSQL database name")
+	postgresUser     = flag.String("u", "root", "Bareos PostgreSQL username")
+	postgresPassword = flag.String("p", "./auth", "PostgreSQL password file path")
+	postgresHostname = flag.String("h", "127.0.0.1", "PostgreSQL hostname")
+	postgresPort     = flag.String("P", "5432", "PostgreSQL port")
+	postgresDb       = flag.String("db", "bareos", "PostgreSQL database name")
 )
 
 func init() {
