@@ -19,11 +19,11 @@ var connectionString string
 var (
 	exporterPort     = flag.Int("port", 9625, "Bareos exporter port")
 	exporterEndpoint = flag.String("endpoint", "/metrics", "Bareos exporter endpoint")
-	mysqlUser        = flag.String("u", "root", "Bareos PostgreSQL username")
-	mysqlAuthFile    = flag.String("p", "./auth", "PostgreSQL password file path")
-	mysqlHostname    = flag.String("h", "127.0.0.1", "PostgreSQL hostname")
-	mysqlPort        = flag.String("P", "5432", "PostgreSQL port")
-	mysqlDb          = flag.String("db", "bareos", "PostgreSQL database name")
+	postgresUser     = flag.String("user", "root", "Bareos PostgreSQL username")
+	postgresPassword = flag.String("password", "./auth", "PostgreSQL password file path")
+	postgresHostname = flag.String("hostname", "127.0.0.1", "PostgreSQL hostname")
+	postgresPort     = flag.String("port", "5432", "PostgreSQL port")
+	postgresDb       = flag.String("dbname", "bareos", "PostgreSQL database name")
 )
 
 func init() {
@@ -37,11 +37,10 @@ func init() {
 func main() {
 	flag.Parse()
 
-	pass, err := ioutil.ReadFile(*mysqlAuthFile)
+	pass, err := ioutil.ReadFile(*postgresPassword)
 	error.Check(err)
-
-	connectionString = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?sslmode=disable", *mysqlUser, strings.TrimSpace(string(pass)), *mysqlHostname, *mysqlPort, *mysqlDb)
-	log.Info("Starting ...")
+	connectionString = fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=disable", *postgresUser, strings.TrimSpace(string(pass)), *postgresHostname, *postgresPort, *postgresDb)
+	log.Info("Starting ...", connectionString)
 	collector := bareosCollector()
 	log.Info("Conecting ...", collector)
 	prometheus.MustRegister(collector)
