@@ -26,14 +26,16 @@ func GetConnection(connectionString string) (*connection, error) {
 
 // GetServerList reads all servers with scheduled backups for current date
 func (connection connection) GetServerList() ([]string, error) {
-	//date := fmt.Sprintf("%s%%", time.Now().Format("2006-01-02"))
-	date := "2006-0%"
-	query := "SELECT DISTINCT Name FROM job WHERE TO_CHAR(SchedTime, 'YYYY-MM-DD') LIKE $1"
-	//query := "SELECT DISTINCT Name FROM job WHERE TO_CHAR(SchedTime, 'YYYY-MM-DD') LIKE ?"
+	date := fmt.Sprintf("%s%%", time.Now().Format("2006-01-02"))
+	//query := "SELECT DISTINCT Name FROM job WHERE TO_CHAR(SchedTime, 'YYYY-MM-DD') LIKE $1"
+	p:=
+	query := "SELECT DISTINCT Name FROM job WHERE TO_CHAR(SchedTime, 'YYYY-MM-DD') LIKE ?"
 	log.Info(query, date)
 	// results, err := connection.DB.Query("SELECT DISTINCT Name FROM job WHERE SchedTime LIKE ?", date)
 	log.Printf("SQL Query: %s, Param: %s", query, date)
-	results, err := connection.DB.Query(query, date)
+	p := "2024-06-%" 
+	results, err := connection.DB.Query(query, p)
+	log.Printf("SQL Query: %s, Param: %s, Result: %s, Errors: %s", query, date, results, err)
 
 	if err != nil {
 		return nil, err
@@ -52,7 +54,8 @@ func (connection connection) GetServerList() ([]string, error) {
 
 // TotalBytes returns total bytes saved for a server since the very first backup
 func (connection connection) TotalBytes(server string) (*types.TotalBytes, error) {
-	results, err := connection.DB.Query("SELECT SUM(JobBytes) FROM job WHERE Name=$1", server)
+	query := "SELECT SUM(JobBytes) FROM job WHERE Name=?"
+	results, err := connection.DB.Query(query, server)
 
 	if err != nil {
 		return nil, err
