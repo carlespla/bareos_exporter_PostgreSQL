@@ -31,10 +31,9 @@ func (connection connection) GetServerList() ([]string, error) {
 	query := "SELECT DISTINCT Name FROM job WHERE TO_CHAR(SchedTime, 'YYYY-MM-DD') LIKE ?"
 	log.Info(query, date)
 	// results, err := connection.DB.Query("SELECT DISTINCT Name FROM job WHERE SchedTime LIKE ?", date)
-	log.Printf("SQL Query: %s, Param: %s", query, date)
 	p := "2024-06-%"
+	log.Printf("SQL Query: %s, Param: %s", query, p)
 	results, err := connection.DB.Query(query, p)
-	log.Printf("SQL Query: %s, Param: %s, Result: %s, Errors: %s", query, date, results, err)
 
 	if err != nil {
 		return nil, err
