@@ -55,7 +55,7 @@ func (connection connection) GetServerList() ([]string, error) {
 
 // TotalBytes returns total bytes saved for a server since the very first backup
 func (connection connection) TotalBytes(server string) (*types.TotalBytes, error) {
-	query := "SELECT SUM(JobBytes) FROM job WHERE Name=?"
+	query := "SELECT SUM(JobBytes) FROM job WHERE Name=$1"
 	results, err := connection.DB.Query(query, server)
 
 	if err != nil {
