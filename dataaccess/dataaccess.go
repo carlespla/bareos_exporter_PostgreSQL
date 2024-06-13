@@ -26,10 +26,9 @@ func GetConnection(connectionString string) (*connection, error) {
 
 // GetServerList reads all servers with scheduled backups for current date
 func (connection connection) GetServerList() ([]string, error) {
-	date := fmt.Sprintf("%s%%", time.Now().Format("2006-01-02"))
-	//results, err := connection.DB.Query("SELECT DISTINCT Name FROM job WHERE TO_CHAR(SchedTime, 'YYYY-MM-DD') LIKE '$1'", date)
+	//date := fmt.Sprintf("%s%%", time.Now().Format("2006-01-02"))
 	//p := "2024-06-11%"
-	results, err := connection.DB.Query("SELECT DISTINCT Name FROM job WHERE TO_CHAR(SchedTime, 'YYYY-MM-DD') LIKE $1", date)
+	results, err := connection.DB.Query("SELECT DISTINCT Name FROM job WHERE TO_CHAR(SchedTime, 'YYYY-MM-DD') LIKE $1", p)
 	//query := "SELECT DISTINCT Name FROM job WHERE TO_CHAR(SchedTime, 'YYYY-MM-DD') LIKE '2024-06-11%'"
 	//results, err := connection.DB.Query(query)
 	log.Info(results, err)
